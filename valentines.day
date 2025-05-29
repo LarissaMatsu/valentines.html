@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Feliz Dia dos Namorados</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Montserrat:wght@400;700&display=swap');
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at center, #ff1c3f, #8b0000);
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .container {
+    position: relative;
+    text-align: center;
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    box-shadow: 0 12px 48px rgba(139, 0, 0, 0.6);
+    max-width: 520px;
+    backdrop-filter: blur(14px);
+    z-index: 10;
+  }
+
+  h1 {
+    font-family: 'Sacramento', cursive;
+    font-size: 5rem;
+    margin-bottom: 8px;
+    color: #ff9aae;
+    text-shadow: 0 2px 12px rgba(255, 20, 70, 0.8);
+  }
+
+  h2 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffccd5;
+    text-shadow: 0 2px 10px rgba(255, 105, 135, 0.6);
+  }
+
+  p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-top: 28px;
+    color: #ffd1dc;
+    text-shadow: 0 2px 8px rgba(60, 0, 0, 0.15);
+  }
+
+  .hearts {
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 3.8rem;
+    color: #ff1a48;
+    animation: pulse 1.8s infinite ease-in-out alternate;
+    filter: drop-shadow(0 0 4px #ff1a48);
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      color: #ff4a68;
+      text-shadow: 0 0 12px #ff4a68;
+    }
+    100% {
+      transform: scale(1.35);
+      color: #ff1a48;
+      text-shadow: 0 0 24px #ff1a48;
+    }
+  }
+
+  .floating-hearts {
+    position: fixed;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    color: #ff1a48;
+    font-size: 28px;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 8px #ff1a48);
+    z-index: 5;
+  }
+
+  /* background subtle heart shapes */
+  .heart-background {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 150vw;
+    height: 150vh;
+    pointer-events: none;
+    user-select: none;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.12;
+    background-image:
+      radial-gradient(circle, #ff1a48 15%, transparent 16%),
+      radial-gradient(circle, #ff4a68 15%, transparent 16%);
+    background-position: 10% 30%, 80% 70%;
+    background-repeat: repeat;
+    background-size: 80px 80px;
+    animation: heartFloatBG 15s linear infinite;
+  }
+  @keyframes heartFloatBG {
+    0% {
+      background-position: 10% 30%, 80% 70%;
+    }
+    100% {
+      background-position: 10% 10%, 80% 110%;
+    }
+  }
+
+</style>
+</head>
+<body>
+  <div class="heart-background" aria-hidden="true"></div>
+  <div class="container" role="main" aria-label="Mensagem de Dia dos Namorados">
+    <h1>Para Você, Meu Amor ❤️</h1>
+    <h2>Feliz Dia dos Namorados!</h2>
+    <p>
+      Cada dia ao seu lado meu coração bate mais forte. Que nosso amor aumente cada vez mais, cheio de carinho, risadas e infinitos abraços. Você é tudo pra mim, minha inspiração, e meu sonho que se tornou realidade, Eu te amo!
+    </p>
+    <div class="hearts" aria-hidden="true">
+      <span>❤️</span>
+      <span>💖</span>
+      <span>💕</span>
+      <span>💗</span>
+      <span>💘</span>
+      <span>❣️</span>
+      <span>💓</span>
+    </div>
+  </div>
+
+  <script>
+    const heartEmojis = ['❤️', '💖', '💕', '💗', '💘', '❣️', '💓'];
+
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-hearts');
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+
+      // Larger size range for vibrant presence
+      const size = 18 + Math.random() * 40;
+      heart.style.fontSize = size + 'px';
+
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+      // start at bottom viewport
+      heart.style.top = '100vh';
+
+      document.body.appendChild(heart);
+
+      heart.animate([
+        { transform: `translateY(0)`, opacity: 1 },
+        { transform: `translateY(-120vh)`, opacity: 0 }
+      ], {
+        duration: 7000 + Math.random() * 4000,
+        easing: 'linear'
+      });
+
+      setTimeout(() => {
+        heart.remove();
+      }, 11000);
+    }
+    // Increase hearts frequency to make it more full of hearts
+    setInterval(createFloatingHeart, 200);
+  </script>
+</body>
+</html>
+
